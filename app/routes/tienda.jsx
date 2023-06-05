@@ -20,6 +20,7 @@ export function links() {
     }
   ]
 }
+
 export async function loader() {
   const guitarras = await getGuitarras()
   return guitarras.data

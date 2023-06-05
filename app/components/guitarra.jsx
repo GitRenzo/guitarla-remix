@@ -4,7 +4,7 @@ function Guitarra({ guitarra }) {
 
     // console.log(guitarra);
     const { descripcion, image, precio, url, nombre } = guitarra
-    // console.log(image.data.attributes.formats.medium.url);
+    console.log(image.data.attributes.formats.medium.url);
     return (
         <div className="guitarra">
             <img src={image.data.attributes.formats.medium.url} alt={`imagen ${nombre }`}/>
@@ -12,7 +12,7 @@ function Guitarra({ guitarra }) {
                 <h3>{nombre} </h3>
                 <p className="descripcion">{descripcion}</p>
                 <p className="precio">${precio}</p>
-                <Link className="enlace" to={`/guitaras/${url}`}>Ver Producto</Link>
+                <Link className="enlace" to={`/guitarras/${url}`}>Ver Producto</Link>
             </div>
         </div>
     )
