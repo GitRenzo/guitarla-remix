@@ -3,6 +3,7 @@ import { getGuitarra } from '../model/guitars.server';
 import styles from '../styles/guitarras.css'
 
 export async function loader({ request, params }) {
+    console.log(params);
     const { guitarraUrl } = params
     const guitarra = await getGuitarra(guitarraUrl)
 
@@ -10,7 +11,7 @@ export async function loader({ request, params }) {
     if (guitarra.data.length === 0) {
         throw new Response('', {
             status: 404,
-            statusText: 'Guitarra no encontrada'
+            statusText: 'Error'
         })
     }
 
