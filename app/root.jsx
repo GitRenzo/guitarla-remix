@@ -1,8 +1,16 @@
-import { Meta, Links, Outlet, Scripts, LiveReload } from '@remix-run/react'
+import { Meta, Links, Outlet, Scripts, LiveReload, useRouteError, isRouteErrorResponse, Link } from '@remix-run/react'
 import styles from './styles/index.css'
 import Header from './components/header'
 import Footer from './components/footer'
 export function meta() {
+    const error = useRouteError()
+    if(error){
+        return [{
+            title: 'Page not found',
+            description: 'Pagina no encontrada'
+        }]
+    }
+
     return [
         {
             charset: 'utf-8',
@@ -46,7 +54,7 @@ export default function app() {
     )
 }
 
-function Document({ children }) {
+export function Document({ children }) {
     return (
         <html lang="es">
             <head>
@@ -63,3 +71,45 @@ function Document({ children }) {
         </html>
     )
 }
+
+
+// Manejo de errores v2 since useCatch has been deprecated
+export function ErrorBoundary() {
+    const error = useRouteError()
+
+    if (isRouteErrorResponse(error)) {
+        return (
+            <Document>
+                <p className='error'>Pagina no encontrada: {error.status}</p>
+                <Link className='error-enlace' to='/'>Talvez quieras volver a la pagina principal</Link>
+            </Document>
+        )
+    }
+    
+    let errorMessage = "Unknown error"
+    return (
+        <Document>
+            <p className='error'>Oh oh, ocurrio un error...</p>
+            <Link className='error-enlace' to='/'>Talvez quieras volver a la pagina principal</Link>
+        </Document>
+    )
+}
+
+
+// This is the V1 and everything works fine
+// export function CatchBoundary() {
+//     const error = useCatch()
+//     return (
+//         <Document>
+//             <p className='error'>{error.status} {error.statusText}</p>
+//         </Document>
+//     )
+// }
+
+// export function ErrorBoundary({ error }) {
+//     return (
+//         <Document>
+//             <p className='error'>{error.status} {error.statusText}</p>
+//         </Document>
+//     );
+// }

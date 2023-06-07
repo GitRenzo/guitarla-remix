@@ -4,7 +4,7 @@ function Guitarra({ guitarra }) {
 
     // console.log(guitarra);
     const { descripcion, image, precio, url, nombre } = guitarra
-    console.log(image.data.attributes.formats.medium.url);
+    // console.log(image.data.attributes.formats.medium.url);
     return (
         <div className="guitarra">
             <img src={image.data.attributes.formats.medium.url} alt={`imagen ${nombre }`}/>
