@@ -1,7 +1,6 @@
 import { useLoaderData } from "@remix-run/react"
 import { getGuitarras } from "../model/guitars.server"
 import ListadoGuitarras from "../components/listado-guitarras"
-import styles from '../styles/guitarras.css'
 
 export function meta() {
     return [
